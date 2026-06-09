@@ -1,0 +1,39 @@
+<div class="admin-results-page">
+  <div class="admin-results-page__backdrop" aria-hidden="true"></div>
+
+  <div class="admin-results-page__content">
+    <header class="admin-results-page__hero">
+      <p class="admin-results-page__eyebrow">Admin Portal</p>
+      <h1 class="admin-results-page__title">Admin Results Panel</h1>
+      <p class="admin-results-page__subtitle">
+        Register final match results and update prediction points.
+      </p>
+    </header>
+
+    <div class="admin-results-page__matches">
+      @if (vm$ | async; as vm) {
+        @for (match of rows(); track match.id) {
+          <div class="admin-results-page__row-wrapper">
+            <app-result-row
+              [match]="match"
+              [isEditing]="match.status === 'Editando'"
+              [hideActions]="true"
+              [forceEnableInputs]="true"
+              (resultChange)="onResultChange($event)"
+            ></app-result-row>
+          </div>
+        }
+
+        <div class="admin-results-page__footer">
+          <button
+            class="admin-results-page__finish-btn"
+            (click)="onFinishEditing()"
+            [disabled]="!canFinish(rows())"
+          >
+            {{ isSubmitting() ? 'Enviando...' : 'Enviar resultados' }}
+          </button>
+        </div>
+      }
+    </div>
+  </div>
+</div>

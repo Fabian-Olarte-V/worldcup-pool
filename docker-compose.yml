@@ -1,0 +1,55 @@
+version: "3.9"
+
+services:
+  mysqldb:
+    image: mysql:8.4
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: realtime-db
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - app-net
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u${DB_USER} -p${DB_PASSWORD} --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: 
+      context: ./Backend
+      dockerfile: Dockerfile
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+    environment:
+      - ConnectionStrings__Default=Server=${DB_HOST};Port=${DB_PORT};Database=${DB_NAME};User=${DB_USER};Password=${DB_PASSWORD}
+    ports:
+      - 8080:8080
+    networks:
+      - app-net
+
+  frontend:
+    build: 
+      context: ./Frontend
+      dockerfile: Dockerfile
+    depends_on:
+      - backend
+    ports:
+      - 80:80
+    networks:
+      - app-net
+
+volumes:
+  mysql_data:
+    external: false
+
+networks:
+  app-net:
+    driver: bridge

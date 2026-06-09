@@ -1,0 +1,61 @@
+<div class="lp-modal-backdrop">
+  <div class="lp-modal" role="dialog" aria-modal="true">
+    <div class="lp-modal__header">
+      <h3>{{ fullName }} - Prediction History</h3>
+      <button class="btn btn-ghost" type="button" (click)="onClose()">Cerrar</button>
+    </div>
+
+    <div class="lp-modal__body">
+      @if (predictions.length === 0) {
+        <p class="lp-modal__empty">Aun no hay predicciones.</p>
+      } @else {
+          @for (p of predictions; track p.id) {
+            <div class="lp-prediction">
+              <div class="lp-prediction__cell lp-prediction__cell--meta">
+                <div class="lp-prediction__meta">{{ p.dateLabel }} · {{ p.timeLabel }}</div>
+              </div>
+
+              <div class="lp-prediction__cell lp-prediction__cell--teams">
+                <div class="team">
+                  <img
+                    class="team__flag"
+                    [src]="'https://flagcdn.com/w20/' + p.homeTeam.code.toLowerCase() + '.png'"
+                    [srcset]="'https://flagcdn.com/w40/' + p.homeTeam.code.toLowerCase() + '.png 2x'"
+                    [alt]="p.homeTeam.name"
+                    width="20"
+                    height="15"
+                  />
+                  <span class="team__name">{{ p.homeTeam.name }}</span>
+                </div>
+
+                <div class="score">{{ p.predictedHomeGoals }} - {{ p.predictedAwayGoals }}</div>
+
+                <div class="team">
+                  <img
+                    class="team__flag"
+                    [src]="'https://flagcdn.com/w20/' + p.awayTeam.code.toLowerCase() + '.png'"
+                    [srcset]="'https://flagcdn.com/w40/' + p.awayTeam.code.toLowerCase() + '.png 2x'"
+                    [alt]="p.awayTeam.name"
+                    width="20"
+                    height="15"
+                  />
+                  <span class="team__name">{{ p.awayTeam.name }}</span>
+                </div>
+              </div>
+
+              <div class="lp-prediction__cell lp-prediction__cell--result">
+                @if (p.status === 'Finalizado') {
+                  <ng-container>
+                    <span class="lp-prediction__points">{{ p.points }} pts</span>
+                  </ng-container>
+                }
+                <ng-template #pendingState>
+                  <span class="lp-prediction__status">Pending</span>
+                </ng-template>
+              </div>
+            </div>
+          }
+        }
+    </div>
+  </div>
+</div>

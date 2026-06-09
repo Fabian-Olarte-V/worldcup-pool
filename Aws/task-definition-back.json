@@ -1,0 +1,92 @@
+{
+  "family": "realtime-dashboard-back",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "cpu": "512",
+  "memory": "1024",
+  "executionRoleArn": "arn:aws:iam::351667818284:role/ecsTaskExecutionRole",
+  "runtimePlatform": {
+    "cpuArchitecture": "X86_64",
+    "operatingSystemFamily": "LINUX"
+  },
+  "containerDefinitions": [
+    {
+      "name": "backend",
+      "image": "351667818284.dkr.ecr.us-east-1.amazonaws.com/worldcup-backend-repo:latest",
+      "essential": true,
+      "dependsOn": [
+        {
+          "containerName": "database",
+          "condition": "HEALTHY"
+        }
+      ],
+      "portMappings": [
+        {
+          "containerPort": 8080,
+          "hostPort": 8080,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        {
+          "name": "ASPNETCORE_ENVIRONMENT",
+          "value": "Production"
+        },
+        {
+          "name": "ConnectionStrings__Default",
+          "value": "Server=localhost;Port=3306;Database=realtime-db;User=admin;Password=admin"
+        }
+      ]
+    },
+    {
+      "name": "database",
+      "image": "mysql:8.4",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 3306,
+          "hostPort": 3306,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        {
+          "name": "MYSQL_ROOT_PASSWORD",
+          "value": "admin"
+        },
+        {
+          "name": "MYSQL_DATABASE",
+          "value": "realtime-db"
+        },
+        {
+          "name": "MYSQL_USER",
+          "value": "admin"
+        },
+        {
+          "name": "MYSQL_PASSWORD",
+          "value": "admin"
+        }
+      ],
+      "healthCheck": {
+        "command": [
+          "CMD-SHELL",
+          "mysqladmin ping -h 127.0.0.1 -uadmin -padmin --silent || exit 1"
+        ],
+        "interval": 5,
+        "timeout": 5,
+        "retries": 10,
+        "startPeriod": 10
+      }
+    }
+  ],
+  "logConfiguration": {
+    "logDriver": "awslogs",
+    "options": {
+      "awslogs-group": "/ecs/tu-app",
+      "awslogs-region": "us-east-1",
+      "awslogs-stream-prefix": "ecs"
+    }
+  }
+}

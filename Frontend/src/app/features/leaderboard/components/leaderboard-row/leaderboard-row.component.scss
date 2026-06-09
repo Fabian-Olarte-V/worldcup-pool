@@ -1,0 +1,32 @@
+.leaderboard-row {
+  display: grid;
+  grid-template-columns: 48px 1fr 64px 64px 64px 80px;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  &__name {
+    font-weight: 600;
+    color: #e6f0e8;
+  }
+
+  &__col {
+    &.stats {
+      text-align: center;
+      color: rgba(230, 240, 232, 0.85);
+    }
+
+    &.action {
+      text-align: right;
+    }
+  }
+
+  @media (max-width: 720px) {
+    grid-template-columns: 40px 1fr 48px 48px 48px 56px;
+  }
+}

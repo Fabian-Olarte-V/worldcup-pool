@@ -1,0 +1,19 @@
+.leaderboard-table {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.leaderboard-table__header {
+  display: grid;
+  grid-template-columns: 48px 1fr 64px 64px 64px 80px;
+  padding: 0.75rem 1rem;
+  background: rgba(255,255,255,0.03);
+  color: rgba(230,240,232,0.9);
+  font-weight: 600;
+}
+
+.leaderboard-table__rows { display: flex; flex-direction: column; }
+
+@media (max-width: 720px) {
+  .leaderboard-table__header { grid-template-columns: 40px 1fr 48px 48px 48px 56px; }
+}

@@ -1,0 +1,34 @@
+<div class="leaderboard-table">
+  <div class="leaderboard-table__header">
+    <div class="leaderboard-table__col player">Player</div>
+    <div class="leaderboard-table__col stats">Pts</div>
+    <div class="leaderboard-table__col stats">Won</div>
+    <div class="leaderboard-table__col stats">Outcome</div>
+    <div class="leaderboard-table__col stats">Lost</div>
+    <div class="leaderboard-table__col action"></div>
+  </div>
+
+  <div class="leaderboard-table__rows">
+    @for (u of users; track u.userId) {
+      <div
+        class="leaderboard-row"
+        tabindex="0"
+        role="button"
+        (click)="onSelect(u)"
+        (keydown.enter)="onSelect(u)"
+        (keydown.space)="onSelect(u); $event.preventDefault()"
+      >
+        <div class="leaderboard-row__col player">
+          <div class="leaderboard-row__name">{{ u.fullName }}</div>
+        </div>
+        <div class="leaderboard-row__col stats">{{ u.points }}</div>
+        <div class="leaderboard-row__col stats">{{ u.wonCount }}</div>
+        <div class="leaderboard-row__col stats">{{ u.correctOutcomeCount }}</div>
+        <div class="leaderboard-row__col stats">{{ u.lostCount }}</div>
+        <div class="leaderboard-row__col action">
+          <button class="btn btn-ghost" type="button">Ver</button>
+        </div>
+      </div>
+    }
+  </div>
+</div>

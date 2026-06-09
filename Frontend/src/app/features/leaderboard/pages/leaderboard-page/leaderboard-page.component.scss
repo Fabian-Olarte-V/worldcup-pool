@@ -1,0 +1,213 @@
+:host {
+  display: block;
+  min-height: 100%;
+  background:
+    radial-gradient(circle at top, rgba(45, 212, 191, 0.08), transparent 30%),
+    linear-gradient(180deg, #06141f 0%, #0b1724 45%, #101826 100%);
+  color: #e5eef5;
+}
+
+.leaderboard-page {
+  max-width: 1180px;
+  width: 100%;
+  margin: 0 auto;
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+
+  &__hero {
+    text-align: center;
+    margin-bottom: 3.2rem;
+  }
+
+  &__eyebrow {
+    color: #4f46e5;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 0.8rem 0;
+  }
+
+  &__title {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    margin: 0 0 1rem 0;
+    background: linear-gradient(135deg, #f8faf7, #d8e6de);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  &__subtitle {
+    color: rgba(221, 233, 228, 0.72);
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  &__state {
+    margin-top: 1rem;
+    padding: 1rem 1.25rem;
+    border-radius: 0.75rem;
+    background: rgba(15, 23, 42, 0.55);
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    color: #cbd5e1;
+    text-align: center;
+
+    &--error {
+      color: #fecaca;
+      border-color: rgba(248, 113, 113, 0.25);
+      background: rgba(127, 29, 29, 0.18);
+    }
+  }
+
+  @media (max-width: 768px) {
+    &__content {
+      padding: 1.5rem 0.75rem;
+    }
+
+    &__title {
+      font-size: 1.6rem;
+    }
+  }
+}
+
+.leaderboard-table {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(15, 23, 42, 0.4);
+
+  &__header {
+    display: grid;
+    grid-template-columns: 48px minmax(200px, 1.4fr) 72px 72px 96px 72px 104px;
+    column-gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    color: rgba(230, 240, 232, 0.9);
+    font-weight: 600;
+  }
+
+  &__rows {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__col {
+    min-width: 0;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 720px) {
+    &__header {
+      grid-template-columns: 36px minmax(150px, 1.2fr) 48px 48px 56px 48px 84px;
+    }
+  }
+}
+
+.leaderboard-row {
+  display: grid;
+  grid-template-columns: 48px minmax(200px, 1.4fr) 72px 72px 96px 72px 104px;
+  column-gap: 0.5rem;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+
+  &__name {
+    font-weight: 600;
+    color: #e6f0e8;
+  }
+
+  &__col {
+    min-width: 0;
+    white-space: nowrap;
+
+    &.stats {
+      text-align: center;
+      color: rgba(230, 240, 232, 0.85);
+    }
+
+    &.action {
+      text-align: center;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 720px) {
+    grid-template-columns: 36px minmax(160px, 1fr) 84px 48px 48px 56px 48px;
+  }
+}
+
+.lp-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1200;
+}
+
+.lp-modal {
+  width: min(920px, 96%);
+  max-height: 86vh;
+  overflow: auto;
+  background: #0b1220;
+  border-radius: 8px;
+  padding: 1rem;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__body {
+    margin-top: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+.lp-prediction {
+  padding: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+
+  &__teams {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.25rem;
+  }
+
+  &__meta {
+    color: rgba(230, 240, 232, 0.6);
+    font-size: 0.85rem;
+  }
+
+  &__result {
+    margin-top: 0.5rem;
+    color: rgba(230, 240, 232, 0.9);
+  }
+}
+
+.btn {
+  background-color: transparent;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  color: white;
+  padding: 6px;
+  cursor: pointer;
+}

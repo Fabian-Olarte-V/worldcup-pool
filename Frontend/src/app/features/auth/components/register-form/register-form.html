@@ -1,0 +1,143 @@
+<form class="register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+  <h2 class="register-form__title">Create account</h2>
+
+  <div class="register-form__grid">
+    <div class="register-form__field">
+      <label for="firstName">First name</label>
+      <input
+        id="firstName"
+        type="text"
+        formControlName="firstName"
+        placeholder="Enter your first name"
+        autocomplete="given-name"
+      />
+      @if (firstNameControl.touched || submitted) {
+        @if (firstNameControl.hasError('required')) {
+          <small class="error">First name is required.</small>
+        }
+        @if (firstNameControl.hasError('minlength')) {
+          <small class="error">First name must be at least 3 characters long.</small>
+        }
+      }
+    </div>
+
+    <div class="register-form__field">
+      <label for="lastName">Last name</label>
+      <input
+        id="lastName"
+        type="text"
+        formControlName="lastName"
+        placeholder="Enter your last name"
+        autocomplete="family-name"
+      />
+      @if (lastNameControl.touched || submitted) {
+        @if (lastNameControl.hasError('required')) {
+          <small class="error">Last name is required.</small>
+        }
+        @if (lastNameControl.hasError('minlength')) {
+          <small class="error">Last name must be at least 3 characters long.</small>
+        }
+      }
+    </div>
+
+    <div class="register-form__field">
+      <label for="email">Email</label>
+      <input
+        id="email"
+        type="email"
+        formControlName="email"
+        placeholder="Enter your email"
+        autocomplete="email"
+      />
+      @if (emailControl.touched || submitted) {
+        @if (emailControl.hasError('required')) {
+          <small class="error">Email is required.</small>
+        }
+        @if (emailControl.hasError('email')) {
+          <small class="error">Email format is invalid.</small>
+        }
+      }
+    </div>
+
+    <div class="register-form__field">
+      <label for="username">Username</label>
+      <input
+        id="username"
+        type="text"
+        formControlName="username"
+        placeholder="Choose a username"
+        autocomplete="username"
+      />
+      @if (usernameControl.touched || submitted) {
+        @if (usernameControl.hasError('required')) {
+          <small class="error">Username is required.</small>
+        }
+        @if (usernameControl.hasError('minlength')) {
+          <small class="error">Username must be at least 3 characters long.</small>
+        }
+      }
+    </div>
+  </div>
+
+  <div class="register-form__field">
+    <label for="password">Password</label>
+    <div class="register-form__password-row">
+      <input
+        id="password"
+        class="register-form__password-input"
+        [type]="showPassword ? 'text' : 'password'"
+        formControlName="password"
+        placeholder="Create a password"
+        autocomplete="new-password"
+      />
+      <button
+        class="register-form__toggle"
+        type="button"
+        [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'"
+        (click)="toggleShowPassword()"
+      >
+        @if (showPassword) {
+          <app-eye-off-icon></app-eye-off-icon>
+        } @else {
+          <app-eye-icon></app-eye-icon>
+        }
+      </button>
+    </div>
+
+    @if (passwordControl.touched || submitted) {
+      @if (passwordControl.hasError('required')) {
+        <small class="error">Password is required.</small>
+      }
+      @if (passwordControl.hasError('minlength')) {
+        <small class="error">Password must be at least 8 characters long.</small>
+      }
+    }
+  </div>
+
+  <div class="register-form__field">
+    <span class="register-form__label">Role</span>
+    <div class="register-form__role-options" role="radiogroup" aria-label="Select a role">
+      @for (role of roles; track role) {
+        <label
+          class="register-form__role-option"
+          [class.register-form__role-option--selected]="roleControl.value === role"
+        >
+          <input type="radio" formControlName="role" [value]="role" />
+          <span class="register-form__role-text">{{ role }}</span>
+        </label>
+      }
+    </div>
+    @if (roleControl.touched || submitted) {
+      @if (roleControl.hasError('required')) {
+        <small class="error">Role is required.</small>
+      }
+    }
+  </div>
+
+  <button class="register-form__submit" type="submit">Sign up</button>
+
+  <p class="register-form__login">
+    Already have an account?
+    <button class="register-form__link-btn" type="button" (click)="onLogin()">Login</button>
+  </p>
+</form>

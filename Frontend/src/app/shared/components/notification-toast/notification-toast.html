@@ -1,0 +1,10 @@
+@if (uiNotification.notification(); as notification) {
+  <span
+    class="notification-toast"
+    [ngClass]="{
+      'notification-toast--error': notification.type === 'error',
+      'notification-toast--success': notification.type === 'success',
+    }">
+    {{ notification.message }}
+  </span>
+}

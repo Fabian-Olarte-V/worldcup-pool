@@ -1,0 +1,19 @@
+<div
+  class="leaderboard-row"
+  tabindex="0"
+  role="button"
+  (click)="onOpen()"
+  (keydown.enter)="onOpen()"
+  (keydown.space)="onOpen(); $event.preventDefault()"
+>
+  <div class="leaderboard-row__col player">
+    <div class="leaderboard-row__name">{{ user.fullName }}</div>
+  </div>
+  <div class="leaderboard-row__col stats">{{ user.points }}</div>
+  <div class="leaderboard-row__col stats">{{ user.wonCount }}</div>
+  <div class="leaderboard-row__col stats">{{ user.correctOutcomeCount }}</div>
+  <div class="leaderboard-row__col stats">{{ user.lostCount }}</div>
+  <div class="leaderboard-row__col action">
+    <button class="btn btn-ghost" type="button">Ver</button>
+  </div>
+</div>

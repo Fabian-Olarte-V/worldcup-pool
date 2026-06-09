@@ -1,0 +1,55 @@
+<section class="leaderboard-page">
+  @if (vm$ | async; as vm) {
+    <div class="leaderboard-page__content">
+      <section class="leaderboard-page__hero">
+        <p class="leaderboard-page__eyebrow">Polla Mundialista</p>
+        <h1 class="leaderboard-page__title">Leaderboard</h1>
+        <p class="leaderboard-page__subtitle">
+          Revisa los puntos de cada jugador y abre su historial de predicciones partido a partido.
+        </p>
+      </section>
+
+      <div class="leaderboard-table">
+        <div class="leaderboard-table__header">
+          <div class="leaderboard-table__col pos">#</div>
+          <div class="leaderboard-table__col player">Player</div>
+          <div class="leaderboard-table__col stats">Pts</div>
+          <div class="leaderboard-table__col stats">Won</div>
+          <div class="leaderboard-table__col stats">Outcome</div>
+          <div class="leaderboard-table__col stats">Lost</div>
+          <div class="leaderboard-table__col action">Action</div>
+        </div>
+
+        @for (user of vm.users; track user.userId) {
+          <div class="leaderboard-row">
+            <div class="leaderboard-row__col pos">{{ user.position }}</div>
+            <div class="leaderboard-row__col player">
+              <div class="leaderboard-row__name">{{ user.fullName }}</div>
+            </div>
+            <div class="leaderboard-row__col stats">{{ user.points }}</div>
+            <div class="leaderboard-row__col stats">{{ user.wonCount }}</div>
+            <div class="leaderboard-row__col stats">{{ user.correctOutcomeCount }}</div>
+            <div class="leaderboard-row__col stats">{{ user.lostCount }}</div>
+            <div class="leaderboard-row__col action">
+              <button
+                class="btn btn-ghost"
+                type="button"
+                (click)="openHistory(user); $event.stopPropagation()"
+              >
+                Ver Historial
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+
+      @if (selectedUser) {
+        <app-user-predictions-modal
+          [fullName]="selectedUser.fullName"
+          [predictions]="selectedPredictions"
+          (closed)="closeHistory()"
+        />
+      }
+    </div>
+  }
+</section>

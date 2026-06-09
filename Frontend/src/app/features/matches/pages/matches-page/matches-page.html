@@ -1,0 +1,25 @@
+<section class="matches-page">
+  <div class="matches-page__backdrop" aria-hidden="true"></div>
+
+  @if (vm$ | async; as vm) {
+    <div class="matches-page__content">
+    <header class="matches-page__hero">
+      <p class="matches-page__eyebrow">Polla Mundialista</p>
+      <h1 class="matches-page__title">Proximos Encuentros</h1>
+      <p class="matches-page__subtitle">
+        Predice los resultados de los próximos partidos y compite con tus amigos.
+      </p>
+    </header>
+
+      @if (!vm.loading && vm.matches.length > 0) {
+        @for (match of vm.matches; track match.id) {
+          <app-match-row
+            [match]="match"
+            [points]="match.points ?? null"
+            (submitMatch)="onMatchSubmit($event)">
+          </app-match-row>
+        }
+      }
+    </div>
+  }
+</section>

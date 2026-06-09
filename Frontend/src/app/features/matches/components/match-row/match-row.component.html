@@ -1,0 +1,10 @@
+<div class="match-row-wrapper">
+  <app-result-row
+    [match]="match"
+    [points]="points"
+    [isEditing]="(isEditing$ | async) ?? false"
+    [hideActions]="match.status === 'Finalizado'"
+    (editRequested)="onStartEditing()"
+    (saveResult)="onSaveResult($event)"
+  ></app-result-row>
+</div>

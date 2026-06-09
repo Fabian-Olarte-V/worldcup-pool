@@ -1,0 +1,9 @@
+@if (status === 'Pendiente') {
+  <span class="badge badge--pending">Pendiente</span>
+} @else if (status === 'Editando') {
+  <span class="badge badge--editing">Editando</span>
+} @else if (status === 'Finalizado') {
+  <span class="badge badge--finished">Finalizado</span>
+} @else if (status === 'Enviado') {
+  <span class="badge badge--sent">Enviado</span>
+}

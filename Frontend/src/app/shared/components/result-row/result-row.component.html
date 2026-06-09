@@ -1,0 +1,65 @@
+<div class="result-row">
+  <div class="result-row__datetime">
+    <span class="result-row__date">{{ match.dateLabel }}</span>
+    <span class="result-row__time">{{ match.timeLabel }}</span>
+  </div>
+
+  <div class="result-row__match">
+    <app-team-result-card [team]="match.homeTeam"></app-team-result-card>
+
+    <div class="result-row__scores">
+      <input
+        type="number"
+        min="0"
+        [(ngModel)]="homeGoals"
+        (input)="onInputChange($event, 'home')"
+        class="result-row__score-input"
+        [disabled]="!(isEditing || forceEnableInputs)"
+        aria-label="Home goals"
+        placeholder="-"
+      />
+      <span class="result-row__separator">-</span>
+      <input
+        type="number"
+        min="0"
+        [(ngModel)]="awayGoals"
+        (input)="onInputChange($event, 'away')"
+        class="result-row__score-input"
+        [disabled]="!(isEditing || forceEnableInputs)"
+        aria-label="Away goals"
+        placeholder="-"
+      />
+    </div>
+
+    @if (shouldShowIncompleteHint()) {
+      <div class="result-row__admin-hint">
+        <span class="result-row__hint-text">Completa ambos goles antes de enviar</span>
+      </div>
+    }
+
+    @if (points !== null) {
+      <div class="result-row__points">
+        <span class="result-row__points-text">Puntos obtenidos: {{ points }}</span>
+      </div>
+    }
+
+    <app-team-result-card [team]="match.awayTeam"></app-team-result-card>
+  </div>
+
+  <div class="result-row__status">
+    <app-result-status-badge [status]="match.status"></app-result-status-badge>
+  </div>
+
+  @if (!hideActions && match.status !== 'Enviado') {
+    <div class="result-row__actions">
+      <button
+        class="result-row__btn"
+        (click)="onActionClick($event)"
+        [disabled]="isSaveDisabled() && isEditing"
+        [attr.aria-label]="match.status === 'Finalizado' ? 'Update Result' : 'Save Result'"
+      >
+        {{ isEditing ? 'Enviar' : 'Editar' }}
+      </button>
+    </div>
+  }
+</div>

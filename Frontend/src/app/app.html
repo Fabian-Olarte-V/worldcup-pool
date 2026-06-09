@@ -1,0 +1,41 @@
+<main class="app-shell">
+  @if (showHeader) {
+    <header class="app-header">
+      <div class="app-brand">
+        <span class="app-brand__mark">WC</span>
+        <span class="app-brand__text">Polla Mundialista</span>
+      </div>
+
+      <nav class="app-nav" aria-label="Primary navigation">
+        <a
+          class="app-nav__link"
+          routerLink="/matches"
+          routerLinkActive="app-nav__link--active"
+          [routerLinkActiveOptions]="{ exact: true }">
+          Matches
+        </a>
+        <a
+          class="app-nav__link"
+          routerLink="/leaderboard"
+          routerLinkActive="app-nav__link--active">
+          Leaderboard
+        </a>
+        @if (isAdmin()) {
+          <a
+            class="app-nav__link"
+            routerLink="/admin-panel"
+            routerLinkActive="app-nav__link--active">
+            Admin
+          </a>
+        }
+      </nav>
+
+      <button type="button" class="logout-button" (click)="logout()">Logout</button>
+    </header>
+  }
+
+  <app-notification-toast />
+  <section class="app-content" [class.app-content--auth]="!showHeader">
+    <router-outlet />
+  </section>
+</main>

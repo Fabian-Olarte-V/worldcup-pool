@@ -1,0 +1,16 @@
+:host {
+  display: block;
+}
+
+.match-row-wrapper {
+  cursor: pointer;
+  padding: 0.2rem;
+  border-radius: 0.6rem;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(79, 70, 229, 0.08);
+  }
+}
+
+

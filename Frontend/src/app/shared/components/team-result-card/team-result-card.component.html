@@ -1,0 +1,14 @@
+<div class="team-card">
+  <img
+    class="team-card__flag"
+    [src]="'https://flagcdn.com/w20/' + team.code.toLowerCase() + '.png'"
+    [srcset]="'https://flagcdn.com/w40/' + team.code.toLowerCase() + '.png 2x'"
+    [alt]="team.name"
+    width="20"
+    height="15"
+  />
+  <div class="team-card__info">
+    <span class="team-card__code">{{ team.code }}</span>
+    <span class="team-card__name">{{ team.name }}</span>
+  </div>
+</div>

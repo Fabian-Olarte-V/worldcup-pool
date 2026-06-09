@@ -1,0 +1,20 @@
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { AuthState } from './auth.models';
+import { authFeatureKey } from './auth.reducer';
+import { UserRole } from '../models/appUser';
+
+export const selectAuthState = createFeatureSelector<AuthState>(authFeatureKey);
+
+export const selectUser = createSelector(selectAuthState, (s) => s.user);
+export const selectUserId = createSelector(selectUser, (user) => user?.id ?? null);
+export const selectToken = createSelector(selectAuthState, (s) => s.token);
+export const selectRefreshToken = createSelector(selectAuthState, (s) => s.refreshToken);
+export const selectExpiresAtUtc = createSelector(selectAuthState, (s) => s.expiresAtUtc);
+export const selectUserRole = createSelector(selectUser, (user) => user?.role ?? null);
+export const selectIsAdmin = createSelector(
+  selectUserRole,
+  (role) => role === ('ADMIN' satisfies UserRole),
+);
+export const selectIsAuthenticated = createSelector(selectAuthState, (s) => s.authStatus);
+export const selectAuthLoading = createSelector(selectAuthState, (s) => s.loading);
+export const selectAuthError = createSelector(selectAuthState, (s) => s.error);
