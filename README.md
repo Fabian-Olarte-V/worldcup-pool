@@ -32,6 +32,5 @@ El proyecto esta dividido en tres partes principales:
 - No se agrego una suite completa de tests para todo el proyecto; solo hay pruebas generales para las funcionalidades principales.
 - Los datos iniciales del sistema se cargan por medio de una semilla al arrancar la aplicacion.
 
-## Usuarios de prueba
+## Usuario de prueba
 - Admin: usuario `Admin` - contraseña `Admin123`
-- User: usuario `User` - contraseña `User123`

@@ -41,12 +41,12 @@ namespace WorldCupPool.Infrastructure.Persistence.Seed
             return
             [
                 new AppUser(
-                "WorldCup",
-                "User",
-                "user@test.com",
-                "user",
-                passwordHasher.HashPassword("User123"),
-                UserRole.User),
+                    "WorldCup",
+                    "User",
+                    "user@test.com",
+                    "user",
+                    passwordHasher.HashPassword("User1234"),
+                    UserRole.User),
                 new AppUser(
                     "WorldCup",
                     "Admin",

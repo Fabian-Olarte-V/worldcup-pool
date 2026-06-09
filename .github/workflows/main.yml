@@ -1,9 +1,5 @@
 name: Ecs(Fargate) Deployment
-on:
-  workflow_dispatch:
-  push:
-    branches:
-      - master
+on: workflow_dispatch
 env:
   AWS_REGION: us-east-1
   ECS_CLUSTER: worlcup-pool-cluster
