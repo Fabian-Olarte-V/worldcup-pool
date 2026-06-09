@@ -1,0 +1,21 @@
+# Build output
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio
+.vs/
+*.user
+*.rsuser
+*.suo
+
+# Rider / VS Code
+.idea/
+.vscode/
+
+# Local tooling and caches
+TestResults/
+*.cache
+*.pdb
+
+# ASP.NET local settings
+appsettings.Local.json

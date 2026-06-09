@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="WorldCupPool.Api/WorldCupPool.Api.csproj" />
+  <Project Path="WorldCupPool.Application/WorldCupPool.Application.csproj" />
+  <Project Path="WorldCupPool.Domain/WorldCupPool.Domain.csproj" />
+  <Project Path="WorldCupPool.Infrastructure/WorldCupPool.Infrastructure.csproj" />
+  <Project Path="WorldCupPool.Tests/WorldCupPool.Tests.csproj" />
+</Solution>
