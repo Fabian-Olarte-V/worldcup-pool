@@ -1,14 +1,18 @@
 name: Ecs(Fargate) Deployment
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
 env:
   AWS_REGION: us-east-1
-  ECS_CLUSTER: realtime-dashboard-cluster
+  ECS_CLUSTER: worlcup-pool-cluster
 
-  ECR_REPOSITORY_BACK: realtime-dashboard-backend-repo
-  ECR_REPOSITORY_FRONT: realtime-dashboard-frontend-repo
+  ECR_REPOSITORY_BACK: worldcup-backend-repo
+  ECR_REPOSITORY_FRONT: worldcup-frontend-repo
 
-  ECS_SERVICE_BACK: realtime-dashboard-back-service
-  ECS_SERVICE_FRONT: realtime-dashboard-front-service
+  ECS_SERVICE_BACK: backend-ecs-service
+  ECS_SERVICE_FRONT: frontend-ecs-service
 
   ECS_TASK_DEFINITION_BACK: Aws/task-definition-back.json
   ECS_TASK_DEFINITION_FRONT: Aws/task-definition-front.json
@@ -33,13 +37,13 @@ jobs:
           dotnet-version: 9
 
       - name: Restore Dependencies
-        run: dotnet restore ./Api/Backend.slnx
+        run: dotnet restore ./WorldCupPool.slnx
       
       - name: Build
-        run: dotnet build ./Api/Backend.slnx --no-restore
+        run: dotnet build ./WorldCupPool.slnx --no-restore
       
       - name: Run Tests
-        run: dotnet test ./Testing/UnitTesting.csproj --no-build
+        run: dotnet test ./WorldCupPool.Tests/WorldCupPool.Tests.csproj --no-build
 
 
   frontend-build:
