@@ -1,99 +1,99 @@
 <form class="register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
-  <h2 class="register-form__title">Create account</h2>
+  <h2 class="register-form__title">Crear cuenta</h2>
 
   <div class="register-form__grid">
     <div class="register-form__field">
-      <label for="firstName">First name</label>
+      <label for="firstName">Nombre</label>
       <input
         id="firstName"
         type="text"
         formControlName="firstName"
-        placeholder="Enter your first name"
+        placeholder="Ingresa tu nombre"
         autocomplete="given-name"
       />
       @if (firstNameControl.touched || submitted) {
         @if (firstNameControl.hasError('required')) {
-          <small class="error">First name is required.</small>
+          <small class="error">El nombre es obligatorio.</small>
         }
         @if (firstNameControl.hasError('minlength')) {
-          <small class="error">First name must be at least 3 characters long.</small>
+          <small class="error">El nombre debe tener al menos 3 caracteres.</small>
         }
       }
     </div>
 
     <div class="register-form__field">
-      <label for="lastName">Last name</label>
+      <label for="lastName">Apellido</label>
       <input
         id="lastName"
         type="text"
         formControlName="lastName"
-        placeholder="Enter your last name"
+        placeholder="Ingresa tu apellido"
         autocomplete="family-name"
       />
       @if (lastNameControl.touched || submitted) {
         @if (lastNameControl.hasError('required')) {
-          <small class="error">Last name is required.</small>
+          <small class="error">El apellido es obligatorio.</small>
         }
         @if (lastNameControl.hasError('minlength')) {
-          <small class="error">Last name must be at least 3 characters long.</small>
+          <small class="error">El apellido debe tener al menos 3 caracteres.</small>
         }
       }
     </div>
 
     <div class="register-form__field">
-      <label for="email">Email</label>
+      <label for="email">Correo</label>
       <input
         id="email"
         type="email"
         formControlName="email"
-        placeholder="Enter your email"
+        placeholder="Ingresa tu correo"
         autocomplete="email"
       />
       @if (emailControl.touched || submitted) {
         @if (emailControl.hasError('required')) {
-          <small class="error">Email is required.</small>
+          <small class="error">El correo es obligatorio.</small>
         }
         @if (emailControl.hasError('email')) {
-          <small class="error">Email format is invalid.</small>
+          <small class="error">El formato del correo no es valido.</small>
         }
       }
     </div>
 
     <div class="register-form__field">
-      <label for="username">Username</label>
+      <label for="username">Usuario</label>
       <input
         id="username"
         type="text"
         formControlName="username"
-        placeholder="Choose a username"
+        placeholder="Elige un usuario"
         autocomplete="username"
       />
       @if (usernameControl.touched || submitted) {
         @if (usernameControl.hasError('required')) {
-          <small class="error">Username is required.</small>
+          <small class="error">El usuario es obligatorio.</small>
         }
         @if (usernameControl.hasError('minlength')) {
-          <small class="error">Username must be at least 3 characters long.</small>
+          <small class="error">El usuario debe tener al menos 3 caracteres.</small>
         }
       }
     </div>
   </div>
 
   <div class="register-form__field">
-    <label for="password">Password</label>
+    <label for="password">Contrasena</label>
     <div class="register-form__password-row">
       <input
         id="password"
         class="register-form__password-input"
         [type]="showPassword ? 'text' : 'password'"
         formControlName="password"
-        placeholder="Create a password"
+        placeholder="Crea una contrasena"
         autocomplete="new-password"
       />
       <button
         class="register-form__toggle"
         type="button"
-        [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'"
+        [attr.aria-label]="showPassword ? 'Ocultar contrasena' : 'Mostrar contrasena'"
         (click)="toggleShowPassword()"
       >
         @if (showPassword) {
@@ -106,38 +106,38 @@
 
     @if (passwordControl.touched || submitted) {
       @if (passwordControl.hasError('required')) {
-        <small class="error">Password is required.</small>
+        <small class="error">La contrasena es obligatoria.</small>
       }
       @if (passwordControl.hasError('minlength')) {
-        <small class="error">Password must be at least 8 characters long.</small>
+        <small class="error">La contrasena debe tener al menos 8 caracteres.</small>
       }
     }
   </div>
 
   <div class="register-form__field">
-    <span class="register-form__label">Role</span>
-    <div class="register-form__role-options" role="radiogroup" aria-label="Select a role">
+    <span class="register-form__label">Rol</span>
+    <div class="register-form__role-options" role="radiogroup" aria-label="Selecciona un rol">
       @for (role of roles; track role) {
         <label
           class="register-form__role-option"
           [class.register-form__role-option--selected]="roleControl.value === role"
         >
           <input type="radio" formControlName="role" [value]="role" />
-          <span class="register-form__role-text">{{ role }}</span>
+          <span class="register-form__role-text">{{ role === 'ADMIN' ? 'Administrador' : 'Usuario' }}</span>
         </label>
       }
     </div>
     @if (roleControl.touched || submitted) {
       @if (roleControl.hasError('required')) {
-        <small class="error">Role is required.</small>
+        <small class="error">El rol es obligatorio.</small>
       }
     }
   </div>
 
-  <button class="register-form__submit" type="submit">Sign up</button>
+  <button class="register-form__submit" type="submit">Registrarse</button>
 
   <p class="register-form__login">
-    Already have an account?
-    <button class="register-form__link-btn" type="button" (click)="onLogin()">Login</button>
+    Ya tienes una cuenta?
+    <button class="register-form__link-btn" type="button" (click)="onLogin()">Ingresar</button>
   </p>
 </form>

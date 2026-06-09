@@ -3,7 +3,7 @@
     <div class="leaderboard-page__content">
       <section class="leaderboard-page__hero">
         <p class="leaderboard-page__eyebrow">Polla Mundialista</p>
-        <h1 class="leaderboard-page__title">Leaderboard</h1>
+        <h1 class="leaderboard-page__title">Clasificación</h1>
         <p class="leaderboard-page__subtitle">
           Revisa los puntos de cada jugador y abre su historial de predicciones partido a partido.
         </p>
@@ -12,12 +12,12 @@
       <div class="leaderboard-table">
         <div class="leaderboard-table__header">
           <div class="leaderboard-table__col pos">#</div>
-          <div class="leaderboard-table__col player">Player</div>
+          <div class="leaderboard-table__col player">Jugador</div>
           <div class="leaderboard-table__col stats">Pts</div>
-          <div class="leaderboard-table__col stats">Won</div>
-          <div class="leaderboard-table__col stats">Outcome</div>
-          <div class="leaderboard-table__col stats">Lost</div>
-          <div class="leaderboard-table__col action">Action</div>
+          <div class="leaderboard-table__col stats">Ganados</div>
+          <div class="leaderboard-table__col stats">Aciertos</div>
+          <div class="leaderboard-table__col stats">Perdidos</div>
+          <div class="leaderboard-table__col action">Accion</div>
         </div>
 
         @for (user of vm.users; track user.userId) {
@@ -36,7 +36,7 @@
                 type="button"
                 (click)="openHistory(user); $event.stopPropagation()"
               >
-                Ver Historial
+                Ver historial
               </button>
             </div>
           </div>

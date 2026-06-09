@@ -15,7 +15,7 @@
         (input)="onInputChange($event, 'home')"
         class="result-row__score-input"
         [disabled]="!(isEditing || forceEnableInputs)"
-        aria-label="Home goals"
+        aria-label="Goles local"
         placeholder="-"
       />
       <span class="result-row__separator">-</span>
@@ -26,7 +26,7 @@
         (input)="onInputChange($event, 'away')"
         class="result-row__score-input"
         [disabled]="!(isEditing || forceEnableInputs)"
-        aria-label="Away goals"
+        aria-label="Goles visitante"
         placeholder="-"
       />
     </div>
@@ -56,7 +56,7 @@
         class="result-row__btn"
         (click)="onActionClick($event)"
         [disabled]="isSaveDisabled() && isEditing"
-        [attr.aria-label]="match.status === 'Finalizado' ? 'Update Result' : 'Save Result'"
+        [attr.aria-label]="match.status === 'Finalizado' ? 'Actualizar resultado' : 'Guardar resultado'"
       >
         {{ isEditing ? 'Enviar' : 'Editar' }}
       </button>

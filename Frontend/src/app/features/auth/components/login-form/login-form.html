@@ -1,37 +1,37 @@
 <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
-  <h2 class="login-form__title">Welcome back</h2>
+  <h2 class="login-form__title">Bienvenido de nuevo</h2>
 
   <div class="login-form__field">
-    <label for="username">Username</label>
+    <label for="username">Usuario</label>
     <input
       id="username"
       type="text"
       formControlName="username"
-      placeholder="Enter your username"
+      placeholder="Ingresa tu usuario"
       autocomplete="username"
     />
     @if (usernameControl.touched || submitted) {
       @if (usernameControl.hasError('required')) {
-        <small class="error">Username is required.</small>
+        <small class="error">El usuario es obligatorio.</small>
       }
     }
   </div>
 
   <div class="login-form__field">
-    <label for="password">Password</label>
+    <label for="password">Contrasena</label>
     <div class="login-form__password-row">
       <input
         id="password"
         class="login-form__password-input"
         [type]="showPassword ? 'text' : 'password'"
         formControlName="password"
-        placeholder="Enter your password"
+        placeholder="Ingresa tu contrasena"
         autocomplete="current-password"
       />
       <button
         class="login-form__toggle"
         type="button"
-        [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'"
+        [attr.aria-label]="showPassword ? 'Ocultar contrasena' : 'Mostrar contrasena'"
         (click)="toggleShowPassword()"
       >
         @if (showPassword) {
@@ -44,18 +44,18 @@
 
     @if (passwordControl.touched || submitted) {
       @if (passwordControl.hasError('required')) {
-        <small class="error">Password is required.</small>
+        <small class="error">La contrasena es obligatoria.</small>
       }
       @if (passwordControl.hasError('minlength')) {
-        <small class="error">Password must be at least 8 characters long.</small>
+        <small class="error">La contrasena debe tener al menos 8 caracteres.</small>
       }
     }
   </div>
 
-  <button class="login-form__submit" type="submit">Login</button>
+  <button class="login-form__submit" type="submit">Ingresar</button>
 
   <p class="login-form__signup">
-    Don&apos;t have an account?
-    <button class="login-form__link-btn" type="button" (click)="onSignUp()">Sign up</button>
+    No tienes una cuenta?
+    <button class="login-form__link-btn" type="button" (click)="onSignUp()">Registrate</button>
   </p>
 </form>

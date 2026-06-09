@@ -31,6 +31,8 @@ El proyecto esta dividido en tres partes principales:
 ## Notas
 - No se agrego una suite completa de tests para todo el proyecto; solo hay pruebas generales para las funcionalidades principales.
 - Los datos iniciales del sistema se cargan por medio de una semilla al arrancar la aplicacion.
+- Dado que el alcance del proyecto se concentro en una solucion full stack completa, incluyendo frontend, backend, despliegue y documentacion, no se priorizo una vista mobile dedicada.
 
 ## Usuario de prueba
 - Admin: usuario `Admin` - contraseña `Admin123`
+- User: usuario `User` - contraseña `User1234`
