@@ -187,7 +187,7 @@ describe('MatchesPage', () => {
     expect(matchRow.result).toEqual({ homeGoals: null, awayGoals: null });
     expect(matchRow.status).toBe('Pendiente');
     expect(uiNotificationService.show).toHaveBeenCalledWith(
-      'You must be logged in to access this page.',
+      'No se pudo crear la predicción.',
     );
   });
 });

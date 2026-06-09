@@ -15,6 +15,7 @@ import {
   PredictionPayloadDto,
   PredictionSubmissionPayload,
 } from '../../../../shared/models/prediction/prediction';
+import { isGoalValid } from '../../../../shared/utils/goal-utils';
 import { MatchDto } from '../../../matches/models/match';
 import { MatchesPageViewModel } from '../../../matches/models/match';
 import { MatchResultService } from '../../services/match-result.service';
@@ -106,7 +107,7 @@ export class AdminResultsPage {
   }
 
   onResultChange(event: PredictionPayloadDto): void {
-    if (event.HomeGoals === null || event.AwayGoals === null) {
+    if (!this.isValidResult(event)) {
       this.savedResults.set(this.savedResults().filter((draft) => draft.MatchId !== event.MatchId));
       this.rows.set(
         this.rows().map((row) =>
@@ -144,6 +145,10 @@ export class AdminResultsPage {
           : row,
       ),
     );
+  }
+
+  private isValidResult(event: PredictionPayloadDto): event is PredictionSubmissionPayload {
+    return isGoalValid(event.HomeGoals) && isGoalValid(event.AwayGoals);
   }
 
   onFinishEditing(): void {

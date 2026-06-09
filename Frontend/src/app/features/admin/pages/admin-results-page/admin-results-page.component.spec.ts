@@ -164,6 +164,36 @@ describe('AdminResultsPage', () => {
     expect(component.rows()[0].status).toBe('Pendiente');
   });
 
+  it('should clear a draft when goals are outside the allowed range', () => {
+    component.savedResults.set([
+      {
+        MatchId: 'match-1',
+        HomeGoals: 2,
+        AwayGoals: 1,
+      },
+    ]);
+    component.rows.set([
+      {
+        id: 'match-1',
+        dateLabel: '08 June',
+        timeLabel: '18:00',
+        homeTeam: { id: 'col', name: 'Colombia', code: 'COL' },
+        awayTeam: { id: 'bra', name: 'Brazil', code: 'BRA' },
+        result: { homeGoals: 2, awayGoals: 1 },
+        status: 'Editando',
+      },
+    ]);
+
+    component.onResultChange({
+      MatchId: 'match-1',
+      HomeGoals: 21,
+      AwayGoals: 1,
+    });
+
+    expect(component.savedResults()).toEqual([]);
+    expect(component.rows()[0].status).toBe('Pendiente');
+  });
+
   it('should submit results, mark rows as finished and notify success', () => {
     component.savedResults.set([
       {

@@ -90,7 +90,7 @@ export class MatchesPage {
       error: () => {
         match.result = previousResult;
         match.status = previousStatus;
-        this.uiNotificationService.show('You must be logged in to access this page.');
+        this.uiNotificationService.show('No se pudo crear la predicción.');
       },
     });
   }

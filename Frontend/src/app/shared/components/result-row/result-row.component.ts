@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { TeamResultCardComponent, TeamResultCardViewModel } from '../team-result-card/team-result-card.component';
 import { ResultStatusBadgeComponent } from '../result-status-badge/result-status-badge.component';
 import { PredictionPayloadDto } from '../../models/prediction/prediction';
+import { isGoalValid, normalizeGoalValue } from '../../utils/goal-utils';
 
 export interface MatchResultViewModel {
   homeGoals: number | null;
@@ -68,11 +69,11 @@ export class ResultRowComponent implements OnInit, OnChanges {
   }
 
   onSaveResult(): void {
-    if (this.homeGoals !== null && this.awayGoals !== null) {
+    if (this.areGoalsValid()) {
       this.saveResult.emit({
         matchId: this.match.id,
-        homeGoals: this.homeGoals,
-        awayGoals: this.awayGoals,
+        homeGoals: this.homeGoals!,
+        awayGoals: this.awayGoals!,
       });
     }
   }
@@ -88,7 +89,7 @@ export class ResultRowComponent implements OnInit, OnChanges {
   }
 
   isSaveDisabled(): boolean {
-    return !this.isEditing || this.homeGoals === null || this.awayGoals === null;
+    return !this.isEditing || !this.areGoalsValid();
   }
 
   shouldShowIncompleteHint(): boolean {
@@ -107,7 +108,9 @@ export class ResultRowComponent implements OnInit, OnChanges {
   onInputChange(event: Event, field: 'home' | 'away'): void {
     const target = event.target as HTMLInputElement;
     const parsedValue = target.value === '' ? null : parseInt(target.value, 10);
-    const value = parsedValue === null || Number.isNaN(parsedValue) ? null : Math.max(0, parsedValue);
+    const value = normalizeGoalValue(parsedValue);
+
+    target.value = value === null ? '' : value.toString();
 
     if (field === 'home') {
       this.homeGoals = value;
@@ -129,5 +132,9 @@ export class ResultRowComponent implements OnInit, OnChanges {
     this.awayGoals = this.match.result.awayGoals;
     this.homeTouched = false;
     this.awayTouched = false;
+  }
+
+  private areGoalsValid(): boolean {
+    return isGoalValid(this.homeGoals) && isGoalValid(this.awayGoals);
   }
 }

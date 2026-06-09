@@ -7,8 +7,8 @@ env:
   ECR_REPOSITORY_BACK: worldcup-backend-repo
   ECR_REPOSITORY_FRONT: worldcup-frontend-repo
 
-  ECS_SERVICE_BACK: backend-service
-  ECS_SERVICE_FRONT: frontend-service
+  ECS_SERVICE_BACK: backend-ecs-service
+  ECS_SERVICE_FRONT: frontend-ecs-service
 
   ECS_TASK_DEFINITION_BACK: Aws/task-definition-back.json
   ECS_TASK_DEFINITION_FRONT: Aws/task-definition-front.json
